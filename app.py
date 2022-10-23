@@ -9,21 +9,27 @@ from sqlalchemy import false
 #uses tables
 
 app = Flask (__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-
 db = SQLAlchemy(app)
-
 app.app_context().push()
 
 #Database Model
 #Erase database everytime you create a new field/variable 
 class Lugares(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    categoria = db.Column(db.String(), nullable = False)
-    nombre = db.Column(db.String(), nullable = False)
-    direccion = db.Column(db.String(), nullable = False)
-    telefono = db.Column(db.String, nullable = False)
+    category = db.Column(db.String(), nullable = False)
+    name = db.Column(db.String(), nullable = False)
+    description = db.Column(db.String)
+    banner_url = db.Column(db.String, nullable = False)
+    direction = db.Column(db.String(), nullable = False)
+    direction_ref = db.Column(db.String)
+    latitude = db.Column(db.Float, nullable = False)
+    longitude = db.Column(db.Float, nullable = False)
+    bike = db.Column(db.Boolean, nullable = False)
+    car = db.Column(db.Boolean, nullable = False)
+    bus = db.Column(db.Boolean, nullable = False)
+    pickup_service = db.Column(db.Boolean, nullable = False)
+    phone_number = db.Column(db.String, nullable = False)
     email = db.Column(db.String)
     instagram_url = db.Column(db.String)
     facebook_url = db.Column(db.String)
@@ -36,23 +42,14 @@ class Lugares(db.Model):
     friday = db.Column(db.Boolean, nullable = False)
     saturday = db.Column(db.Boolean, nullable = False)
     sunday = db.Column(db.Boolean, nullable = False)
-    description = db.Column(db.String)
-    latitude = db.Column(db.Float, nullable = False)
-    longitude = db.Column(db.Float, nullable = False)
-    banner_url = db.Column(db.String, nullable = False)
     free_entry = db.Column(db.Boolean, nullable = False)
     parking = db.Column(db.Boolean, nullable = False)
     cash = db.Column(db.Boolean, nullable = False)
-    tansfer = db.Column(db.Boolean, nullable = False)
+    transfer = db.Column(db.Boolean, nullable = False)
     card = db.Column(db.Boolean, nullable = False)
     qr_pay = db.Column(db.Boolean, nullable = False)
     e_wallet = db.Column(db.Boolean, nullable = False)
-    bike = db.Column(db.Boolean, nullable = False)
-    car = db.Column(db.Boolean, nullable = False)
-    bus = db.Column(db.Boolean, nullable = False)
-    pickup_service = db.Column(db.Boolean, nullable = False)
-    direction_ref = db.Column(db.String)
-    accessible_bathroom = db.Column(db.Boolean, nullable = False) #changed from inclusive_bathroom
+    accessible_bathroom = db.Column(db.Boolean, nullable = False) 
     ramp_access = db.Column(db.Boolean, nullable = False)
     wheelchair_available = db.Column(db.Boolean, nullable = False)
     wifi = db.Column(db.Boolean, nullable = False)
@@ -67,12 +64,12 @@ class Lugares(db.Model):
     #place_id (int)
     #image_url (string)
 
-
-    def __init__(self, categoria, nombre, direccion, telefono, email, instagram_url, facebook_url, opening_hours, closing_hours, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description, latitude, longitude, banner_url, free_entry, parking, cash, transfer, card, qr_pay, e_wallet, bike, car, bus, pickup_service, direction_ref, accessible_bathroom, ramp_access, wheelchair_available, wifi, pool, playground, gym, dining, tecnaso):
-        self.categoria = categoria
-        self.nombre = nombre
-        self.direccion = direccion
-        self.telefono = telefono
+    def __init__(self, category, name, direction, phone_number, email, instagram_url, facebook_url, opening_hours, closing_hours, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description, latitude, longitude, banner_url, free_entry, parking, cash, transfer, card, qr_pay, e_wallet, bike, car, bus, pickup_service, direction_ref, accessible_bathroom, ramp_access, wheelchair_available, wifi, pool, playground, gym, dining, tecnaso):
+        self.category = category
+        self.name = name
+        self.direction = direction
+        self.direction_ref = direction_ref
+        self.phone_number = phone_number
         self.email = email
         self.instagram_url = instagram_url
         self.facebook_url = facebook_url
@@ -100,7 +97,6 @@ class Lugares(db.Model):
         self.car = car
         self.bus = bus
         self.pickup_service = pickup_service
-        self.direction_ref = direction_ref
         self.accessible_bathroom = accessible_bathroom
         self.ramp_access = ramp_access
         self.wheelchair_available = wheelchair_available
@@ -114,20 +110,71 @@ class Lugares(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "este es el Homepage"
 
-@app.route('/form/create', methods=['POST', 'GET'])
-def create():
-    #recibo del formulario el nombre de la categoria 
-    categoria = request.form['categoria']
-    telefono = request.form['telefono']
+@app.get('/registro')
+def show_form():
+   #recibo del formulario el nombre de la categoria 
+   return "aca va estar el form"
 
+@app.post('/registro')
+def submit_form(): 
+
+    payment_methods = request.form.getlist('payment_method')
+    transport_available = request.form.getlist('transport_available')
+    inclusive_features = request.form.getlist('inclusive_features')
+    ammenities = request.form.getlist('ammenities')
+    weekdays = request.form.getlist('weekday')
+    category = request.form['category']
+    name = request.form['name']
+    description = request.form['description']
+    banner_url = request.form['banner_url']    
+    direction = request.form['direction']
+    direction_ref = request.form['direction_ref']
+    latitude = request.form['latitude'] 
+    longitude = request.form['longitude']
+    phone_number = request.form['phone_number']
+    email = request.form['email']
+    instagram_url = request.form['instagram_url']
+    facebook_url = request.form['facebook_url']
+    opening_hours = request.form['opening_hours']
+    closing_hours = request.form['closing_hours']
+    monday = 'monday' in weekdays
+    tuesday = 'tuesday' in weekdays
+    wednesday = 'wednesday' in weekdays
+    thursday = 'thursday' in weekdays
+    friday = 'friday' in weekdays
+    saturday = 'saturday' in weekdays
+    sunday = 'sunday' in weekdays
+    free_entry = request.form['free_entry'] == '1'
+    parking = request.form['free_entry'] == '1'
+    cash = 'cash' in payment_methods
+    transfer = 'transfer' in payment_methods
+    card = 'card' in payment_methods
+    qr_pay = 'qr_pay' in payment_methods          
+    e_wallet = 'e_wallet' in payment_methods
+    bike = 'bike' in transport_available
+    car = 'car' in transport_available
+    bus = 'bus' in transport_available
+    pickup_service = 'pickup_service' in transport_available  
+    accessible_bathroom = 'accessible_bathroom' in inclusive_features
+    ramp_access = 'ramp_access' in inclusive_features
+    wheelchair_available = 'wheelchair_available' in inclusive_features
+    wifi = 'wifi' in ammenities
+    pool = 'pool' in ammenities
+    playground = 'playground' in ammenities
+    gym = 'gym' in ammenities
+    dining = 'dining' in ammenities
+    tecnaso = 'tecnaso' in ammenities
+    
     #creo una instancia de mi objeto Form
-    form = Lugares(categoria=categoria, wifi=False, telefono=telefono)  
+    new_place = Lugares(category=category, name=name, direction=direction, direction_ref=direction_ref, latitude=latitude, longitude=longitude, phone_number=phone_number, email=email, instagram_url=instagram_url, facebook_url=facebook_url, opening_hours=opening_hours, closing_hours=closing_hours, monday=monday, tuesday=tuesday, wednesday=wednesday, thursday=thursday, friday=friday, saturday=saturday, sunday=sunday, description=description, banner_url=banner_url, free_entry=free_entry, parking=parking, cash=cash, transfer=transfer, card=card, qr_pay=qr_pay, e_wallet=e_wallet, bike=bike, car=car, bus=bus, pickup_service=pickup_service, accessible_bathroom=accessible_bathroom, ramp_access=ramp_access, wheelchair_available=wheelchair_available, wifi=wifi, pool=pool, playground=playground, gym=gym, dining=dining, tecnaso=tecnaso)  
     #Guardo una sesión y envio commit a la base de datos
-    db.session.add(form)
+    db.session.add(new_place)
     db.session.commit()
-    return redirect(url_for('index'))
+    #return redirect(url_for('index'))
+    #return json que diga datos agregados correctamente
+    return "ahora volvemos a la pagina de inicio caso quieras registrar otro local o punto turístico"
 
 #command to create database: (py app.py) creates the database
 #is created in an instance folder
