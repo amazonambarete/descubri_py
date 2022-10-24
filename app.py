@@ -113,8 +113,12 @@ def index():
 
 @app.get('/registro')
 def show_form():
+    return "aca está el form"
+
+@app.get('/lugares')
+def get_places():
     #recibo del formulario el nombre de la categoria 
-   #recibo del formulario el nombre de la categoria 
+    #recibo del formulario el nombre de la categoria 
     #recibo del formulario el nombre de la categoria 
     #query por el id del negocio
     #un endpoint que me traiga todo
