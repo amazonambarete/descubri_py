@@ -1,10 +1,9 @@
 #py -m venv venv #create environment in terminal
 #.venv\Scripts\activate #activate scripts
 #pip install flask flask_squlalchemy
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import false
-
+from sqlalchemy_serializer import SerializerMixin
 #relational databse
 #uses tables
 
@@ -15,7 +14,7 @@ app.app_context().push()
 
 #Database Model
 #Erase database everytime you create a new field/variable 
-class Lugares(db.Model):
+class Lugares(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(), nullable = False)
     name = db.Column(db.String(), nullable = False)
@@ -114,8 +113,18 @@ def index():
 
 @app.get('/registro')
 def show_form():
-   #recibo del formulario el nombre de la categoria 
-   return "aca va estar el form"
+    return "aca está el form"
+
+@app.get('/lugares')
+def get_places():
+    #recibo del formulario el nombre de la categoria 
+    #recibo del formulario el nombre de la categoria 
+    #recibo del formulario el nombre de la categoria 
+    #query por el id del negocio
+    #un endpoint que me traiga todo
+    results = db.session.query(Lugares).all()
+    json_list = [i.to_dict() for i in results]
+    return json_list
 
 @app.post('/registro')
 def submit_form(): 
@@ -167,7 +176,7 @@ def submit_form():
     dining = 'dining' in ammenities
     tecnaso = 'tecnaso' in ammenities
     
-    #creo una instancia de mi objeto Form
+    #creo una instancia de mi objeto Lugares
     new_place = Lugares(category=category, name=name, direction=direction, direction_ref=direction_ref, latitude=latitude, longitude=longitude, phone_number=phone_number, email=email, instagram_url=instagram_url, facebook_url=facebook_url, opening_hours=opening_hours, closing_hours=closing_hours, monday=monday, tuesday=tuesday, wednesday=wednesday, thursday=thursday, friday=friday, saturday=saturday, sunday=sunday, description=description, banner_url=banner_url, free_entry=free_entry, parking=parking, cash=cash, transfer=transfer, card=card, qr_pay=qr_pay, e_wallet=e_wallet, bike=bike, car=car, bus=bus, pickup_service=pickup_service, accessible_bathroom=accessible_bathroom, ramp_access=ramp_access, wheelchair_available=wheelchair_available, wifi=wifi, pool=pool, playground=playground, gym=gym, dining=dining, tecnaso=tecnaso)  
     #Guardo una sesión y envio commit a la base de datos
     db.session.add(new_place)
