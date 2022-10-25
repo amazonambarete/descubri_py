@@ -1,7 +1,7 @@
 #py -m venv venv #create environment in terminal
 #.venv\Scripts\activate #activate scripts
 #pip install flask flask_squlalchemy
-from flask import Flask, request
+from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 import helpers
@@ -110,11 +110,11 @@ class Lugares(db.Model, SerializerMixin):
 
 @app.route('/')
 def index():
-    return "este es el Homepage"
+    return render_template("home.html")
 
 @app.get('/registro')
 def show_form():
-    return "aca está el form"
+    return render_template("registro.html")
 
 @app.get('/lugares')
 def get_places():
@@ -130,7 +130,6 @@ def get_places():
 
 @app.post('/registro')
 def submit_form(): 
-
     #banner photo file
     banner=request.files['banner']
     banner.save(f"static/places/{banner.filename}")
@@ -189,7 +188,7 @@ def submit_form():
     db.session.commit()
     #return redirect(url_for('index'))
     #return json que diga datos agregados correctamente
-    return "ahora volvemos a la pagina de inicio caso quieras registrar otro local o punto turístico"
+    return redirect(url_for('index'))
 
 #command to create database: (py app.py) creates the database
 #is created in an instance folder

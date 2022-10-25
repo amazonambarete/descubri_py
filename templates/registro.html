@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      type="module"
+      src="{{url_for('static', filename='index.js')}}"
+    ></script>
+  </head>
+  <body>
+    <form
+      action=""
+      method="POST"
+      enctype="multipart/form-data"
+      class="space-y-8 p-8"
+    >
+      <div class="space-y-8">
+        <div>
+          <!-- titulo principal para que los lugares completen -->
+          <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">
+              Hoja de Registro
+            </h3>
+          </div>
+          <!-- primer elemento de nuestro form es el banner o cover photo  -->
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-6">
+              <label
+                for="cover-photo"
+                class="block text-sm font-medium text-gray-700"
+                >Subir Foto o Logo</label
+              >
+              <div
+                class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
+              >
+                <div class="space-y-1 text-center">
+                  <svg
+                    class="mx-auto h-12 w-12 text-gray-400"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <div class="flex text-sm text-gray-600">
+                    <label
+                      for="banner"
+                      class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                    >
+                      <span>Upload a file</span>
+                      <input
+                        id="banner"
+                        name="banner"
+                        type="file"
+                        class="sr-only"
+                      />
+                    </label>
+                    <p class="pl-1">or drag and drop</p>
+                  </div>
+                  <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- arrancamos con el form, primero categoria, nombre, direccion, correo, web y redes -->
+        <div class="pt-8">
+          <div class="sm:col-span-3">
+            <label
+              for="category"
+              class="block text-sm font-medium text-gray-700"
+              >Categoria</label
+            >
+            <div class="mt-1">
+              <select
+                required
+                size="3"
+                id="category"
+                name="category"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="restaurant">Restaurant</option>
+                <option value="hotel">Hotel</option>
+                <option value="attraction">Atractivo</option>
+              </select>
+            </div>
+          </div>
+          <div class="sm:col-span-3">
+            <div class="sm:col-span-3 mt-3">
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >Nombre</label
+              >
+              <div class="mt-1">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  autocomplete="given-name"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="sm:col-span-3 mt-3">
+            <label
+              for="phone_number"
+              class="block text-sm font-medium text-gray-700"
+              >Número de contacto</label
+            >
+            <div class="mt-1">
+              <input
+                type="text"
+                name="phone_number"
+                id="phone_number"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                required
+              />
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-2">
+              <label
+                for="direction"
+                class="block text-sm font-medium text-gray-700"
+                >Dirección</label
+              >
+              <div class="mt-1">
+                <input
+                  type="text"
+                  name="direction"
+                  id="direction"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label
+                for="department"
+                class="block text-sm font-medium text-gray-700"
+                >Departamento</label
+              >
+              <div class="mt-1">
+                <input
+                  type="text"
+                  name="department"
+                  id="department"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label for="email" class="block text-sm font-medium text-gray-700"
+                >Correo</label
+              >
+              <div class="mt-1">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label for="web" class="block text-sm font-medium text-gray-700"
+                >Web</label
+              >
+              <div class="mt-1">
+                <input
+                  id="web"
+                  name="web"
+                  type="text"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="social_url"
+                class="block text-sm font-medium text-gray-700"
+                >Instagram o Facebook</label
+              >
+              <div class="mt-1">
+                <input
+                  id="social_url"
+                  name="social_url"
+                  type="text"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- aca estamos haciendo open days  -->
+        <div class="pt-8">
+          <div class="mt-2">
+            <fieldset>
+              <legend class="sr-only">Días abiertos al público</legend>
+              <div
+                class="text-base font-medium text-gray-900"
+                aria-hidden="true"
+              >
+                Días abiertos al público
+              </div>
+              <div class="mt-4 space-y-4">
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="monday"
+                      name="weekdays"
+                      value="monday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="monday" class="font-medium text-gray-700"
+                      >Lunes</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="tuesday"
+                      name="weekdays"
+                      value="tuesday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tuesday" class="font-medium text-gray-700"
+                      >Martes</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="wednesday"
+                      name="weekdays"
+                      value="wednesday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="wednesday" class="font-medium text-gray-700"
+                      >Miércoles</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="thursday"
+                      name="weekdays"
+                      value="thursday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="thursday" class="font-medium text-gray-700"
+                      >Jueves</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="friday"
+                      name="weekdays"
+                      value="friday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="friday" class="font-medium text-gray-700"
+                      >Viernes</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="saturday"
+                      name="weekdays"
+                      value="saturday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="saturday" class="font-medium text-gray-700"
+                      >Sábado</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start">
+                  <div class="flex h-5 items-center">
+                    <input
+                      id="sunday"
+                      name="weekdays"
+                      value="sunday"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="sunday" class="font-medium text-gray-700"
+                      >Domingo</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="sm:col-span-3 mt-3">
+            <label
+              for="opening_hours"
+              class="block text-base font-medium text-gray-700 mt-4"
+              >Horario de apertura</label
+            >
+            <div class="mt-1">
+              <input
+                type="text"
+                name="opening_hours"
+                id="opening_hours"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+          <div class="sm:col-span-3 mt-3">
+            <label
+              for="closing_hours"
+              class="block text-base font-medium text-gray-700 mt-4"
+              >Horario de cierre</label
+            >
+            <div class="mt-1">
+              <input
+                type="text"
+                name="closing_hours"
+                id="closing_hours"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+          <div class="sm:col-span-3 mt-3">
+            <label
+              for="description"
+              class="block text-base font-medium text-gray-700 mt-4"
+              >Descripción</label
+            >
+            <div class="mt-1">
+              <input
+                type="text"
+                name="description"
+                id="description"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- que hacemos con el mapa -->
+        <div id="map" class="h-[450px] w-full md:w-1/2"></div>
+        <input type="text" name="latitude" id="latitude" />
+        <input type="text" name="longitude" id="longitude" />
+      </div>
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-6">
+          <label
+            for="cover-photo"
+            class="block text-sm font-medium text-gray-70 mt-4"
+            >Subir Imágenes del Lugar</label
+          >
+          <div
+            class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
+          >
+            <div class="space-y-1 text-center">
+              <svg
+                class="mx-auto h-12 w-12 text-gray-400"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div class="flex text-sm text-gray-600">
+                <label
+                  for="file-upload"
+                  class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    class="sr-only"
+                  />
+                </label>
+                <p class="pl-1">or drag and drop</p>
+              </div>
+              <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- termina el form y empieza Accesibilidad  -->
+      <div>
+        <h3
+          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+        >
+          Accesibilidad
+        </h3>
+      </div>
+      <div class="mt-4">
+        <div class="text-base font-medium text-gray-900 pt-2">
+          Estacionamiento
+        </div>
+        <fieldset class="mt-4">
+          <legend class="sr-only">Notification method</legend>
+          <div
+            class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10"
+          >
+            <div class="flex items-center">
+              <input
+                id="parking_true"
+                name="parking"
+                type="radio"
+                value="1"
+                checked
+                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                for="parking_true"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >Sí</label
+              >
+            </div>
+
+            <div class="flex items-center">
+              <input
+                id="parking_false"
+                name="parking"
+                value="0"
+                type="radio"
+                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                for="parking_false"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >No</label
+              >
+            </div>
+          </div>
+        </fieldset>
+        <div class="text-base font-medium text-gray-900 pt-2">
+          Entrada Gratuita
+        </div>
+        <fieldset class="mt-4">
+          <div
+            class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10"
+          >
+            <div class="flex items-center">
+              <input
+                id="free_entry_true"
+                name="free_entry"
+                type="radio"
+                value="1"
+                checked
+                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                for="free_entry_true"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >Sí</label
+              >
+            </div>
+
+            <div class="flex items-center">
+              <input
+                id="free_entry_false"
+                name="free_entry"
+                value="0"
+                type="radio"
+                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                for="free_entry_false"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >No</label
+              >
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div
+            class="text-base font-medium text-gray-900 mt-4"
+            aria-hidden="true"
+          >
+            Transporte
+          </div>
+          <p class="text-sm">Cómo se puede llegar?</p>
+          <div class="mt-4 space-y-4">
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="bike"
+                  name="transport_available"
+                  value="bike"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="bike" class="font-medium text-gray-700">Moto</label>
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="car"
+                  name="transport_available"
+                  value="car"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="car" class="font-medium text-gray-700"
+                  >Auto/Camioneta</label
+                >
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="bus"
+                  name="transport_available"
+                  value="bus"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="bus" class="font-medium text-gray-700"
+                  >Línea de colectivo</label
+                >
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="pickup_service"
+                  name="transport_available"
+                  value="pickup_service"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="pickup_service" class="font-medium text-gray-700"
+                  >Servicio de pick-up</label
+                >
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="sr-only">Métodos de pago</legend>
+          <div
+            class="text-base font-medium text-gray-900 mt-4"
+            aria-hidden="true"
+          >
+            Métodos de pago
+          </div>
+          <div class="mt-4 space-y-4">
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="cash"
+                  name="payment_methods"
+                  value="cash"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="cash" class="font-medium text-gray-700"
+                  >Efectivo</label
+                >
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="transfer"
+                  name="payment_methods"
+                  value="transfer"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="transfer" class="font-medium text-gray-700"
+                  >Transferencia</label
+                >
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="card"
+                  name="payment_methods"
+                  value="card"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="card" class="font-medium text-gray-700"
+                  >Tarjeta crédito/débito</label
+                >
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="qr_pay"
+                  name="payment_methods"
+                  value="qr_pay"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="qr_pay" class="font-medium text-gray-700">QR</label>
+              </div>
+            </div>
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <input
+                  id="e_wallet"
+                  name="payment_methods"
+                  value="e_wallet"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="e_wallet" class="font-medium text-gray-700"
+                  >Billetera electrónica (Tigo Money, Billetera Claro,
+                  etc)</label
+                >
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="sm:col-span-3 mt-3">
+          <label
+            for="direction_ref"
+            class="block text-base font-medium text-gray-700 mt-4"
+            >Instrucciones de como llegar</label
+          >
+          <div class="mt-1">
+            <input
+              type="text"
+              name="direction_ref"
+              id="direction_ref"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <!-- aca arrancamos con inclusion      -->
+      <div>
+        <h3
+          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+        >
+          Inclusividad
+        </h3>
+      </div>
+      <div class="text-base font-medium text-gray-900 pt-2">
+        Rampas de acceso
+      </div>
+      <fieldset>
+        <legend class="sr-only">Notification method</legend>
+        <div
+          class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10"
+        >
+          <div class="flex items-center">
+            <input
+              id="ramp_access_true"
+              name="ramp_access"
+              value="1"
+              type="radio"
+              checked
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="ramp_access_true"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >Sí</label
+            >
+          </div>
+
+          <div class="flex items-center">
+            <input
+              id="ramp_access_false"
+              name="ramp_access"
+              value="0"
+              type="radio"
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="ramp_access_false"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >No</label
+            >
+          </div>
+        </div>
+      </fieldset>
+      <div class="text-base font-medium text-gray-900 pt-2">
+        Disponibilidad de sillas de ruedas
+      </div>
+      <fieldset>
+        <legend class="sr-only">Notification method</legend>
+        <div
+          class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10"
+        >
+          <div class="flex items-center">
+            <input
+              id="wheelchair_available_true"
+              name="wheelchair_available"
+              value="1"
+              type="radio"
+              checked
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="wheelchair_available_true"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >Sí</label
+            >
+          </div>
+
+          <div class="flex items-center">
+            <input
+              id="wheelchair_available_false"
+              name="wheelchair_available"
+              value="0"
+              type="radio"
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="wheelchair_available_false"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >No</label
+            >
+          </div>
+        </div>
+      </fieldset>
+      <div class="text-base font-medium text-gray-900 pt-2">
+        Baños accesibles
+      </div>
+      <fieldset>
+        <legend class="sr-only">Notification method</legend>
+        <div
+          class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10"
+        >
+          <div class="flex items-center">
+            <input
+              id="accessible_bathroom_true"
+              name="accessible_bathroom"
+              value="1"
+              type="radio"
+              checked
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="accessible_bathroom_true"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >Sí</label
+            >
+          </div>
+
+          <div class="flex items-center">
+            <input
+              id="accessible_bathroom_false"
+              name="accessible_bathroom"
+              value="0"
+              type="radio"
+              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label
+              for="accessible_bathroom_false"
+              class="ml-3 block text-sm font-medium text-gray-700"
+              >No</label
+            >
+          </div>
+        </div>
+      </fieldset>
+      <hr />
+      <!-- aca empieza ammenities -->
+      <div>
+        <h3
+          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+        >
+          Comodidades
+        </h3>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="wifi"
+              name="ammenities"
+              value="wifi"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="wifi" class="font-medium text-gray-700">Wifi</label>
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="pool"
+              name="ammenities"
+              value="pool"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="pool" class="font-medium text-gray-700">Piscina</label>
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="playground"
+              name="ammenities"
+              value="playground"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="playground" class="font-medium text-gray-700"
+              >Parque de juegos</label
+            >
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="dining"
+              name="ammenities"
+              value="dining"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="dining" class="font-medium text-gray-700">Dining</label>
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="gym"
+              name="ammenities"
+              value="gym"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="gym" class="font-medium text-gray-700">Gym</label>
+          </div>
+        </div>
+        <div class="relative flex items-start">
+          <div class="flex h-5 items-center">
+            <input
+              id="tecnaso"
+              name="ammenities"
+              value="tecnaso"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="tecnaso" class="font-medium text-gray-700"
+              >Tecnaso</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5">
+        <div class="flex justify-end">
+          <button
+            type="button"
+            class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM3zzdKh0StWLFjCzbKgo5tz2TOyZv6M&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
