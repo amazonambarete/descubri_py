@@ -4,7 +4,8 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
-#relational databse
+import helpers
+#relational database
 #uses tables
 
 app = Flask (__name__)
@@ -106,7 +107,6 @@ class Lugares(db.Model, SerializerMixin):
         self.gym = gym
         self.dining = dining
         self.tecnaso = tecnaso
-        
 
 @app.route('/')
 def index():
@@ -120,7 +120,9 @@ def show_form():
 def get_places():
     #recibo del formulario el nombre de la categoria 
     #un endpoint que me traiga todo
-    results = db.session.query(Lugares).all()
+    args = request.args.to_dict()
+    query = helpers.build_places_query(args)
+    results = query.all()
     json_list = [i.to_dict() for i in results]
     for item in json_list:
         item ['banner'] = f"static/places/{item ['banner']}"
@@ -135,7 +137,6 @@ def submit_form():
     #lists from checkboxes
     payment_methods = request.form.getlist('payment_method')
     transport_available = request.form.getlist('transport_available')
-    inclusive_features = request.form.getlist('inclusive_features')
     ammenities = request.form.getlist('ammenities')
     weekdays = request.form.getlist('weekday')
     #single inputs
@@ -160,7 +161,7 @@ def submit_form():
     saturday = 'saturday' in weekdays
     sunday = 'sunday' in weekdays
     free_entry = request.form['free_entry'] == '1'
-    parking = request.form['free_entry'] == '1'
+    parking = request.form['parking'] == '1'
     cash = 'cash' in payment_methods
     transfer = 'transfer' in payment_methods
     card = 'card' in payment_methods
@@ -171,9 +172,9 @@ def submit_form():
     bus = 'bus' in transport_available
     pickup_service = 'pickup_service' in transport_available  
     direction_ref = request.form['direction_ref']
-    accessible_bathroom = 'accessible_bathroom' in inclusive_features
-    ramp_access = 'ramp_access' in inclusive_features
-    wheelchair_available = 'wheelchair_available' in inclusive_features
+    accessible_bathroom = request.form['accessible_bathroom'] == '1'
+    ramp_access = request.form['ramp_access'] == '1'
+    wheelchair_available = request.form['wheelchair_available'] == '1'
     wifi = 'wifi' in ammenities
     pool = 'pool' in ammenities
     playground = 'playground' in ammenities
