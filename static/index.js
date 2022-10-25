@@ -12,6 +12,10 @@ function initMap() {
     position: asuncion,
     map: map,
   });
+  const latInput = document.getElementById("latitude");
+  const lngInput = document.getElementById("longitude");
+  latInput.value = asuncion.lat;
+  lngInput.value = asuncion.lng;
 
   //map receives click
   map.addListener("click", (e) => {
