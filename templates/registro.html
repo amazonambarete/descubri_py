@@ -17,13 +17,24 @@
       action=""
       method="POST"
       enctype="multipart/form-data"
-      class="space-y-8 p-8"
+      class="space-y-8 p-8 m-2 border-double border-4 border-green-700"
     >
+      <nav>
+        <div class="flex justify-start">
+          <img
+            class="hidden h-20 w-60 lg:block"
+            src="https://i.postimg.cc/L87mm32Q/IMG-20221025-163801.png"
+            alt="Your Company"
+          />
+        </div>
+      </nav>
       <div class="space-y-8">
         <div>
           <!-- titulo principal para que los lugares completen -->
           <div>
-            <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">
+            <h3
+              class="text-2xl font-bold text-green-700 tracking-tight sm:text-4x text-center"
+            >
               Hoja de Registro
             </h3>
           </div>
@@ -85,10 +96,9 @@
             <div class="mt-1">
               <select
                 required
-                size="3"
                 id="category"
                 name="category"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="block w-full rounded-md border-gray-300 shadow-sm border-2 focus:border-gray-300 focus:ring-gray-300 sm:text-sm"
               >
                 <option value="restaurant">Restaurant</option>
                 <option value="hotel">Hotel</option>
@@ -107,7 +117,7 @@
                   name="name"
                   id="name"
                   autocomplete="given-name"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-gray-300 shadow-sm border-2 focus:border-gray-300 focus:ring-gray-300 sm:text-sm"
                   required
                 />
               </div>
@@ -124,7 +134,7 @@
                 type="text"
                 name="phone_number"
                 id="phone_number"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="block w-full rounded-md border-gray-300 border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required
               />
             </div>
@@ -141,7 +151,7 @@
                   type="text"
                   name="direction"
                   id="direction"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />
               </div>
@@ -158,7 +168,7 @@
                   type="text"
                   name="department"
                   id="department"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />
               </div>
@@ -173,7 +183,7 @@
                   name="email"
                   type="email"
                   autocomplete="email"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -186,7 +196,7 @@
                   id="web"
                   name="web"
                   type="text"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -201,7 +211,7 @@
                   id="social_url"
                   name="social_url"
                   type="text"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -345,7 +355,7 @@
                 type="text"
                 name="opening_hours"
                 id="opening_hours"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
@@ -360,7 +370,7 @@
                 type="text"
                 name="closing_hours"
                 id="closing_hours"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
@@ -375,15 +385,15 @@
                 type="text"
                 name="description"
                 id="description"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="block w-full rounded-md border-2 p-4 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
         </div>
         <!-- que hacemos con el mapa -->
         <div id="map" class="h-[450px] w-full md:w-1/2"></div>
-        <input type="text" name="latitude" id="latitude" />
-        <input type="text" name="longitude" id="longitude" />
+        <input type="text" name="latitude" id="latitude" hidden />
+        <input type="text" name="longitude" id="longitude" hidden />
       </div>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
         <div class="sm:col-span-6">
@@ -433,7 +443,7 @@
       <!-- termina el form y empieza Accesibilidad  -->
       <div>
         <h3
-          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+          class="text-2xl font-bold text-green-700 tracking-tight sm:text-4x text-center"
         >
           Accesibilidad
         </h3>
@@ -693,7 +703,7 @@
               type="text"
               name="direction_ref"
               id="direction_ref"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              class="block w-full rounded-md border-2 p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
           </div>
         </div>
@@ -702,7 +712,7 @@
       <!-- aca arrancamos con inclusion      -->
       <div>
         <h3
-          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+          class="text-2xl font-bold text-green-700 tracking-tight sm:text-4x text-center"
         >
           Inclusividad
         </h3>
@@ -831,7 +841,7 @@
       <!-- aca empieza ammenities -->
       <div>
         <h3
-          class="text-lg font-medium leading-6 text-gray-900 text-center mt-4"
+          class="text-2xl font-bold text-green-700 tracking-tight sm:text-4x text-center"
         >
           Comodidades
         </h3>
@@ -937,13 +947,14 @@
           </button>
           <button
             type="submit"
-            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-green-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Guardar
           </button>
         </div>
       </div>
     </form>
+    0 0 0 1 0 0 asd 1 1 1 0 1 1 1 0 1
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM3zzdKh0StWLFjCzbKgo5tz2TOyZv6M&callback=initMap&v=weekly"
