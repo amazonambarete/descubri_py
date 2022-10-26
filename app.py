@@ -3,6 +3,7 @@
 #pip install flask flask_squlalchemy
 from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+import os
 from sqlalchemy_serializer import SerializerMixin
 import helpers
 #relational database
@@ -125,14 +126,14 @@ def get_places():
     results = query.all()
     json_list = [i.to_dict() for i in results]
     for item in json_list:
-        item ['banner'] = f"static/places/{item ['banner']}"
+        item ['banner'] = f"{os.getcwd()}/static/places/{item ['banner']}"
     return json_list
 
 @app.post('/registro')
 def submit_form(): 
     #banner photo file
     banner=request.files['banner']
-    banner.save(f"static/places/{banner.filename}")
+    banner.save(f"{os.getcwd()}/static/places/{banner.filename}")
     #lists from checkboxes
     payment_methods = request.form.getlist('payment_method')
     transport_available = request.form.getlist('transport_available')

@@ -2,3 +2,4 @@ __pycache__
 instance
 venv
 static/places
+test.py
